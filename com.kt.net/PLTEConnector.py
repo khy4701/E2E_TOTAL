@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 import ctypes
 
+from ApiDefine import ResourceType
 from ConfigManager import ConfManager
 from Connector import Connector
 from LogManager import LogManager
 import PLTEConnector
 from PLTEManager import PLTEManager
 from ProvMsg import GeneralQResMsg, GeneralQReqMsg, MTYPE_NBRESTIF_TO_SLEE_REQ, \
-    MTYPE_NBRESTIF_TO_SLEE_RES, MTYPE_SBRESTIF_TO_SLEE_RES, HttpReq, HttpRes
+    MTYPE_NBRESTIF_TO_SLEE_RES, MTYPE_SBRESTIF_TO_SLEE_RES, HttpReq, HttpRes, \
+    MTYPE_SBRESTIF_TO_SLEE_REQ
 import sysv_ipc
 
 
@@ -49,7 +51,12 @@ class PLTEConnector(Connector):
 
         try:
             if self.plteQueue is not None :
-                self.plteQueue.send( pData.contents.raw, True, MTYPE_NBRESTIF_TO_SLEE_REQ )
+                
+                if httpReqMsg.http_hdr.resource_type == ResourceType.NSLCM_NOTIFICATION_ENDPOINT:
+                    self.plteQueue.send( pData.contents.raw, True, MTYPE_SBRESTIF_TO_SLEE_REQ  )
+                else:                    
+                    self.plteQueue.send( pData.contents.raw, True, MTYPE_NBRESTIF_TO_SLEE_REQ)
+                    
 
         except Exception as e:
             self.logger.error("sendMessage Error! %s" % e)
