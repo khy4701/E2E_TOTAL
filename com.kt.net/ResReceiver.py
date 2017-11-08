@@ -68,7 +68,7 @@ class ResReceiver(Receiver):
             
             self.logger.info("MSG RECEIVE..");
 
-            if msgType == MTYPE_SLEE_TO_NBRESTIF_RES :    
+            if msgType == MTYPE_SLEE_TO_NBRESTIF_RES or msgType ==  MTYPE_SLEE_TO_SBRESTIF_RES :    
 
                 # Server Mode( Handling Response Message )
                 ctypes.memmove(ctypes.pointer(resMsg), mydata ,ctypes.sizeof(resMsg))
