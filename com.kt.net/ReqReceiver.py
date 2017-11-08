@@ -65,6 +65,7 @@ class ReqReceiver(Receiver):
             mydata = ctypes.create_string_buffer( message )
             
             #reqMsg = GenQMsg.body
+            self.logger.error("ReqReceiver Queue Read Message ..")
 
             if msgType == MTYPE_SLEE_TO_SBRESTIF_REQ:    
                 # Client Mode ( Handling Request Message )
@@ -106,6 +107,7 @@ class ReqReceiver(Receiver):
                     clientReq = C_NsIntantication(reqMsg)
                                         
                 clientReq.start()
+
 
                 return 
         

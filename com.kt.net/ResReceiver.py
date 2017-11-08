@@ -66,7 +66,7 @@ class ResReceiver(Receiver):
             (message, msgType) = ResReceiver.myQueue.receive(ctypes.sizeof(resMsg))
             mydata = ctypes.create_string_buffer( message )
             
-            self.logger.info("MSG RECEIVE..");
+            self.logger.error("ResReceiver Queue Read Message ..")
 
             if msgType == MTYPE_SLEE_TO_NBRESTIF_RES or msgType ==  MTYPE_SLEE_TO_SBRESTIF_RES :    
 
