@@ -22,7 +22,7 @@ class Service:
 
     
     # NFVO NBI
-    NOTI_OF_LCM     = "/e2e/nslcm/v1/ns_instances/<string:ns_instance_id>/notofication"
+    NOTI_OF_LCM     = "/e2e/nslcm/v1/ns_instances/<string:ns_instance_id>/notification"
 
 
     def __init__(self):

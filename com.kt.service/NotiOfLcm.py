@@ -4,9 +4,11 @@ from flask import request, json
 import flask
 from flask_restful import Resource
 
-from ApiDefine import ApiDefine
+from ApiDefine import ApiDefine, ApiType, ResourceType, OPType, ContentEncoding, \
+    MethodType
 from LogManager import LogManager
 from PLTEManager import PLTEManager
+from ProvMsg import HttpHeader
 from ServiceManager import ServiceManager
 
 
@@ -27,9 +29,18 @@ class NotiOfLcm(Resource, ServiceManager):
         ServiceManager.RecvLogging(self.logger, data, request)
                         
         # 3. [RESTIF->APP] MAKE SEND STRUCT
+        header = HttpHeader()
+        header.method = ServiceManager.getMethodType(request.method)
+        header.api_type = ApiType.NSLCM_API_TYPE
+        header.resource_type = ResourceType.NSLCM_NOTIFICATION_ENDPOINT
+        header.op_type = OPType.Notify_OP_TYPE
+        header.encoding = ContentEncoding.PLAIN
+        
+        Info = ServiceManager.getHttpInfo(ns_instance_id)
+        
         self.clientId = PLTEManager.getInstance().getClientReqId()
-        reqMsg = ServiceManager.setApiToStructMsg(request, data, self.clientId)
-                
+        reqMsg = ServiceManager.setApiToStructMsg(request, data, self.clientId, header, Info)
+        
         # 4. [RESTIF->APP] SEND QUEUE MESSAGE(RELAY)
         PLTEManager.getInstance().sendCommand(ApiDefine, self, reqMsg)
                                         

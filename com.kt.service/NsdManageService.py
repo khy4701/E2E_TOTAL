@@ -20,9 +20,6 @@ class NsdOnboarding(Resource, ServiceManager):
 
     logger = LogManager.getInstance().get_logger()
     
-    
-    
-    
     def post(self):
 
         # [WEB->RESTIF] RECEIVE PROCESS
