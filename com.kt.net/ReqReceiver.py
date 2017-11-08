@@ -2,7 +2,7 @@ import ctypes
 import time
 
 from ApiDefine import ResourceType
-from ClientService import NfvoService, C_NsCreation, C_NsIntantication
+from ClientService import C_NsCreation, C_NsIntantication
 from ConfigManager import ConfManager
 from LogManager import LogManager
 from ProvMsg import GeneralQReqMsg, MTYPE_SLEE_TO_SBRESTIF_REQ, HttpReq
