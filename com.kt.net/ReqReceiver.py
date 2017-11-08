@@ -1,7 +1,8 @@
 import ctypes
 import time
 
-from ClientService import NfvoService
+from ApiDefine import ResourceType
+from ClientService import NfvoService, C_NsCreation, C_NsIntantication
 from ConfigManager import ConfManager
 from LogManager import LogManager
 from ProvMsg import GeneralQReqMsg, MTYPE_SLEE_TO_SBRESTIF_REQ, HttpReq
@@ -98,8 +99,14 @@ class ReqReceiver(Receiver):
                     self.logger.info("NFVO_PORT: %d" %info.nfvo_port )                   
                     self.logger.info("===============================================")
 
-                clientReq = NfvoService(reqMsg)
+                
+                if headerMsg.resource_type == ResourceType.NSLCM_NS_INSTANCES:
+                    clientReq = C_NsCreation(reqMsg)
+                elif headerMsg.resource_type == ResourceType.NSLCM_INSTANTIATE_NS_TASK:
+                    clientReq = C_NsIntantication(reqMsg)
+                                        
                 clientReq.start()
+
                 return 
         
         except Exception as e :
