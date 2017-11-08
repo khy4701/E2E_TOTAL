@@ -90,7 +90,7 @@ class ResReceiver(Receiver):
                     self.logger.info("srcSysId : %c" %resMsg.srcSysId )
                     self.logger.info("nResult : %d" %resMsg.nResult )
                     self.logger.info("jsonBody: %s" %resMsg.jsonBody )
-                    self.logger.info("===============================================");
+                    self.logger.info("HEADER----------------------------------------");
                     self.logger.info("method: %d" %headerMsg.method )
                     self.logger.info("api_type: %d" %headerMsg.api_type )
                     self.logger.info("op_type: %d" %headerMsg.op_type )
