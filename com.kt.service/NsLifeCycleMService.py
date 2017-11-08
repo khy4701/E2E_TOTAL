@@ -93,11 +93,11 @@ class NsInstantiation(Resource, ServiceManager):
         header.op_type = OPType.Instantiate_NS_OP_TYPE
         header.encoding = ContentEncoding.PLAIN
                         
-        Info = ServiceManager.getHttpInfo()
+        Info = ServiceManager.getHttpInfo(nsInstanceId)
                         
         self.clientId = PLTEManager.getInstance().getClientReqId()
         reqMsg = ServiceManager.setApiToStructMsg(request, data, self.clientId, header, Info )
-        reqMsg.info.ns_instance_id = nsInstanceId
+        #reqMsg.info.ns_instance_id = nsInstanceId
                 
         # 4. [RESTIF->APP] SEND QUEUE MESSAGE(RELAY)
         PLTEManager.getInstance().sendCommand(ApiDefine.NS_INSTANTIATION, self, reqMsg)

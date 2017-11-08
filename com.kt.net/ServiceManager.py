@@ -73,10 +73,10 @@ class ServiceManager:
             logger.info("===============================================");
             
     @staticmethod
-    def getHttpInfo(ns_instance="None", nfvo_ip ="None", nfvo_port = 0):
+    def getHttpInfo(ns_instance_id="None", nfvo_ip ="None", nfvo_port = 0):
         
         Info = HttpInfo()
-        Info.ns_instance = ns_instance
+        Info.ns_instance_id = ns_instance_id
         Info.nfvo_ip = nfvo_ip
         Info.nfvo_port = nfvo_port
         
